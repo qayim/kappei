@@ -17,39 +17,39 @@ if(isset($_POST['insert'])){
 	
 	if (strlen($_POST['coffeename']) < 1) {
             $_SESSION['error'] = "Name missing";
-            header("Location: add.php");
+            header("Location: add.php?uid=".$_GET['uid']);
             return;
     } else if (strlen($_POST['coffeename']) > 50) {
         $_SESSION['error'] = "Name exceeds character limit";
-        header("Location: add.php");
+        header("Location: add.php?uid=".$_GET['uid']);
         return;
     } else if (strlen($_POST['available']) < 1) {
         $_SESSION['error'] = "Availability missing";
-        header("Location: add.php");
+        header("Location: add.php?uid=".$_GET['uid']);
         return;
     } else if (strlen($_POST['available']) > 50) {
         $_SESSION['error'] = "Availability exceeds character limit";
-        header("Location: add.php");
+        header("Location: add.php?uid=".$_GET['uid']);
         return;
     } else if (strlen($_POST['price']) < 1) {
             $_SESSION['error'] = "Price missing";
-            header("Location: add.php");
+            header("Location: add.php?uid=".$_GET['uid']);
             return;
     } else if (strlen($_POST['price']) > 50) {
         $_SESSION['error'] = "Price exceeds character limit";
-        header("Location: add.php");
+        header("Location: add.php?uid=".$_GET['uid']);
         return;
     } else if (strlen($_POST['type']) < 1) {
             $_SESSION['error'] = "Type missing";
-            header("Location: add.php");
+            header("Location: add.php?uid=".$_GET['uid']);
             return;
 	} else if (strlen($_POST['method']) < 1) {
             $_SESSION['error'] = "How to order missing";
-            header("Location: add.php");
+            header("Location: add.php?uid=".$_GET['uid']);
             return;
 	} else if (strlen($_POST['method']) > 200) {
         $_SESSION['error'] = "How to order exceeds character limit";
-        header("Location: add.php");
+        header("Location: add.php?uid=".$_GET['uid']);
         return;
     } else {
 		
@@ -65,7 +65,7 @@ if(isset($_POST['insert'])){
 		));
 		
 		$_SESSION['success'] = "Coffee added";
-            header("Location: main.php");
+            header("Location: main.php?uid=".$_GET['uid']);
             return;
 	}
 }
@@ -98,6 +98,13 @@ if(isset($_POST['insert'])){
                 <h1>Add Coffee</h1>
             </div>
         </div>
+
+        <?php
+					if ( isset($_SESSION['error']) ) {
+							echo('<p style="color: red;">'.htmlentities($_SESSION['error'])."</p>\n");
+							unset($_SESSION['error']);
+					}
+			?>
 
         <form method="post">
             <section class="coffeename"> 

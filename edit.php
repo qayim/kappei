@@ -41,39 +41,39 @@ $coffeeid = $_GET['cid'];
     if ( isset($_POST['coffeename']) && isset($_POST['available']) && isset($_POST['price']) && isset($_POST['type']) && isset($_POST['method'])) {
             if (strlen($_POST['coffeename']) < 1) {
                 $_SESSION['error'] = "Name missing";
-                header("Location: edit.php");
+                header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
                 return;
         } else if (strlen($_POST['coffeename']) > 50) {
             $_SESSION['error'] = "Name exceeds character limit";
-            header("Location: edit.php");
+            header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
             return;
         } else if (strlen($_POST['available']) < 1) {
             $_SESSION['error'] = "Availability missing";
-            header("Location: edit.php");
+            header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
             return;
         } else if (strlen($_POST['available']) > 50) {
             $_SESSION['error'] = "Availability exceeds character limit";
-            header("Location: edit.php");
+            header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
             return;
         } else if (strlen($_POST['price']) < 1) {
                 $_SESSION['error'] = "Price missing";
-                header("Location: edit.php");
+                header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
                 return;
         } else if (strlen($_POST['price']) > 50) {
             $_SESSION['error'] = "Price exceeds character limit";
-            header("Location: edit.php");
+            header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
             return;
         } else if (strlen($_POST['type']) < 1) {
                 $_SESSION['error'] = "Type missing";
-                header("Location: edit.php");
+                header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
                 return;
         } else if (strlen($_POST['method']) < 1) {
                 $_SESSION['error'] = "How to order missing";
-                header("Location: edit.php");
+                header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
                 return;
         } else if (strlen($_POST['method']) > 200) {
             $_SESSION['error'] = "How to order exceeds character limit";
-            header("Location: edit.php");
+            header("Location: edit.php?uid=".$_GET['uid']."&&cid=?".$_GET['cid'].);
             return;
         } else {
 
