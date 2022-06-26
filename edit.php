@@ -89,7 +89,7 @@ $coffeeid = $_GET['cid'];
 				':cid' => $coffeeid,
             ));
         $_SESSION['error'] = 'Record edited';
-        header( 'Location: main.php' ) ;
+        header("Location: main.php?uid=".$_GET['uid']);
         return;
         }
     }
