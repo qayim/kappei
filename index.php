@@ -36,7 +36,8 @@ require_once "pdo.php";
 							));
 							$_SESSION["username"] = $_POST["username"];  
 							$_SESSION["password"] = md5($_POST["password"]);
-							header("location: main.php");  
+                            $_SESSION["uid"] = $row["uid"];
+							header("location: main.php?uid=".$row["uid"]);  
 							return;
 						}  
 						else{  

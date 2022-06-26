@@ -1,10 +1,20 @@
 <?php
 	session_start();
     require_once "pdo.php";
+
+	$uid = $_GET['uid'];
 	
+	if ( ! isset($_GET['uid']) ) {
+		  $_SESSION['error'] = "Missing user id";
+		  session_destroy();
+		  header('Location: index.php');
+		  return;
+	}
+
     $stmt = $pdo->query("SELECT * FROM coffee;");
 	 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -31,9 +41,11 @@
     <nav class="navbar navbar-light navbar-expand-md py-3">
         <div class="container-fluid"><img src="img/kappei.svg" style="width: 100px;">
             <h1>Main page</h1>
-			<a href="add.php" class="btn add" role="button" style="margin: 1px;">
-                <i class="material-icons" >add_circle</i>
-            </a>
+			<?php
+				echo('<a href="add.php?uid='.$_GET['uid'].'" class="btn add" role="button" style="margin: 1px;">');
+				echo('<i class="material-icons" >add_circle</i>');
+				echo('</a>');
+			?>
         </div>
     </nav>
     <?php
@@ -51,7 +63,7 @@
 						foreach ($rows as $row) {
 								
 									echo('<div class="col-sm-3">');
-											echo('<a href="edit.php?cid='.$row['cid'].'">');
+											echo('<a href="edit.php?cid='.$row['cid'].'&&uid='.$_GET['uid'].'">');
 												echo('<div class="container p-3 my-3 bg-light">');
 													echo('<img src="img/');
 													echo($row['type']);

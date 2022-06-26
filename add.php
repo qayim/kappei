@@ -2,6 +2,15 @@
 require_once "pdo.php";
 session_start();
 
+$uid = $_GET['uid'];
+	
+	if ( ! isset($_GET['uid']) ) {
+		  $_SESSION['error'] = "Missing user id";
+		  session_destroy();
+		  header('Location: index.php');
+		  return;
+	}
+
 //to check there's input or not
 
 if(isset($_POST['insert'])){

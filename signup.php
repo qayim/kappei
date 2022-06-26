@@ -3,12 +3,27 @@ session_start();
 require_once "pdo.php";
 
 if( isset($_POST['username']) && isset($_POST['password']) && isset($_POST['age'])){
+	
+	//password validation
+	$uppercase = preg_match('@[A-Z]@', $_POST['password']);
+	$lowercase = preg_match('@[a-z]@', $_POST['password']);
+	$number    = preg_match('@[0-9]@', $_POST['password']);
+	$specialChars = preg_match('@[^\w]@', $_POST['password']);
+	
     if (strlen($_POST['username']) < 1) {
         $_SESSION['error'] = "Username missing";
         header("Location: signup.php");
         return;
     } else if (strlen($_POST['password']) < 1) {
         $_SESSION['error'] = "Password missing";
+        header("Location: signup.php");
+        return;
+    } else if (strlen($_POST['password']) < 10) {
+        $_SESSION['error'] = "Password must be at least 10 characters";
+        header("Location: signup.php");
+        return;
+    } else if ($uppercase != 1|| $lowercase != 1 || $number != 1|| $specialChars !=1) {
+        $_SESSION['error'] = "Pasword must include uppercase, lowercase, number and special characters such as ^, \ and w ".$uppercase." ".$lowercase." ".$number." ".$specialChars." ";
         header("Location: signup.php");
         return;
     } else if (strlen($_POST['age']) < 1) {

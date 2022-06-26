@@ -2,6 +2,15 @@
 require_once "pdo.php";
 session_start();
 
+$uid = $_GET['uid'];
+	
+	if ( ! isset($_GET['uid']) ) {
+		  $_SESSION['error'] = "Missing user id";
+		  session_destroy();
+		  header('Location: index.php');
+		  return;
+	}
+
 $_SESSION['cid'] = $_GET['cid'];
 $coffeeid = $_GET['cid'];
 
@@ -232,7 +241,10 @@ $coffeeid = $_GET['cid'];
 
                 <div class="row">
                     <div class="col-sm">
-                    <a href="delete.php?cid=<?$coffeeid?>" class="btn btn-danger" role="button">Delete</a>
+
+                    <?php
+                        echo('<a href="delete.php?cid='.$_GET['cid'].'&&uid='.$_GET['uid'].'" class="btn btn-danger" role="button">Delete</a>');
+                    ?>
                     </div>
                 </div>
             </section>
